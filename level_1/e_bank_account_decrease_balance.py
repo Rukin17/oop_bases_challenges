@@ -18,10 +18,14 @@ class BankAccount:
         self.balance += income
 
     def decrease_balance(self, spent: float):
+        if self.balance < spent:
+            raise ValueError('У вас недостаточно средств')
         self.balance -= spent
 
         
 if __name__ == '__main__':
     user = BankAccount('Huan', 45)
     user.decrease_balance(15)
+    print(user.balance)
+    user.decrease_balance(40)
     print(user.balance)
