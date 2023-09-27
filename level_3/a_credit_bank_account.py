@@ -9,9 +9,7 @@
 """
 
 # код писать тут
-
-
-class CreditAccount:
+class BankAccount:
     def __init__(self, owner_full_name: str, balance: float):
         self.owner_full_name = owner_full_name
         self.balance = balance
@@ -22,10 +20,17 @@ class CreditAccount:
     def decrease_balance(self, amount: float):
         self.balance -= amount
 
+
+class CreditAccount(BankAccount):
     def is_eligible_for_credit(self):
         return self.balance > 1000
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    john = BankAccount('John Connor', 1500)
+    john.increase_balance(50)
+    john.decrease_balance(100)
+    print(john.balance)
+    john_credit = CreditAccount('John Connor', 1450)
+    print(john_credit.is_eligible_for_credit())
 
