@@ -15,16 +15,50 @@ class UserManager:
     def __init__(self):
         self.usernames = []
 
-    def add_user(self, username):
+    def add_user(self, username: str):
         self.usernames.append(username)
 
     def get_users(self):
         return self.usernames
 
 
-# код писать тут
+class AdminManager(UserManager):
+    def ban_username(self, name: str):
+        if name not in self.get_users():
+            print('Такого пользователя не существует')
+        else:
+            self.get_users().remove(name)
+
+
+class SuperAdminManager(AdminManager):
+    def ban_all_users(self):
+        self.usernames = []
+
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    users = UserManager()
+    users.add_user('Jay')
+    users.add_user('Dexter')
+    users.add_user('Mike')
+    users.add_user('Silvername')
+    print(users.get_users())
+
+    ban_user = AdminManager()
+    ban_user.add_user('Mike')
+    ban_user.add_user('Silvername')
+    ban_user.ban_username('Mike')
+    ban_user.ban_username('Jay')
+    print(ban_user.get_users())
+
+    
+    all_ban = SuperAdminManager()
+    all_ban.add_user('Jay')
+    all_ban.add_user('Dexter')
+    all_ban.add_user('Mike')
+    all_ban.ban_username('Tomatos')
+    print(all_ban.get_users())
+
+    all_ban.ban_all_users()
+    print(all_ban.get_users())
 
